@@ -1,0 +1,4 @@
+$('#photo-list').html('<% @photos.each do |photo|%> \
+	<div class="col-md-4 col-sm-12"> \
+	<a rel="leanModal" href="#div787" onClick="set_modal(\'<%= photo.image.to_s %>\', \'<%= photo.text.to_s %>\', \'<%= photo.favorited_by?(current_user) %>\', \'<%= photo.id %>\', \'<%= photo.organization.id %>\')"> \
+	<%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a></div><% end %>');

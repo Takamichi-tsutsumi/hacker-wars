@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   match 'season_change/:season' => 'top#season_change', :via => :get
   match 'favorite' => 'favorite#favorite', :via => :post
   match 'mypage' => 'top#my_page', :via => :get
+  post 'update_photos' => "top#update_photos"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :admin_users, ActiveAdmin::Devise.config

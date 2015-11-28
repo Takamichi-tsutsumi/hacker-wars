@@ -5,29 +5,18 @@ class TopController < ApplicationController
   	@photos = Photo.order('created_at DESC').where(created_at:Time.new(2014, 11, 28, 1, 1, 0, "+09:00")..(Time.now))
   end
 
-  def category_change
-  	p params[:season]
-  	p params[:category_id]
-	@photos = Photo.all.where(season: params[:season],category_id: params[:category_id])
-
-	respond_to do |format|
-		format.js {render :category_change}
-	end
+  def update_photos
+    category = Category.where(name: params[:category]).first
+    p params[:season].to_i == 0
+    @photos = Photo.all if params[:season].to_i == 0
+    @photos = Photo.where(season: params[:season]) unless params[:season].to_i == 0
+    @photos = @photos.where(category_id: category.id) if category
+    respond_to do |format|
+      format.js {render 'update_photos'}
+      # format.html {render 'index'}
+    end
   end
 
-  def season_change
-
-	#受け取ったパラメーターはseasonに関して 0:all, 1:spring, 2:summer, 3:autum, 4:winter に対応
-	if params[:id] == 0
-		@photos = Photo.all
-	else
-		@photos = Photo.where(season: params[:season])
-	end
-	respond_to do |format|
-		format.html { render :index }
-	end
-
-  end
 
   def my_page
   	@photos = User.find(current_user.id).photos

@@ -3,33 +3,40 @@
     <img src="img/logo.gif" width="20%" alt="" />
   <% if !current_user %>    
     <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
+
       <span class="fa fa-facebook"></span>Sign in with Facebook</a>
   <% else %>
       <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-danger pull-right sign-out-button", :method => :delete %>
   <% end %>
-  
-
   </div>
   <div class="season">
     <ul>
-      <div class="active"><li><%= link_to "All", "/season_change/0" %></li></div>
-      <li><%= link_to "Spring", "/season_change/1"  %></li>
-      <li><%= link_to "Summer", "/season_change/2"  %></li>
-      <li><%= link_to "Autum", "/season_change/3"  %></li>
-      <li><%= link_to "Winter", "/season_change/4"  %></li>
+      <li class="active"> <a href="#" data-remote="true" onClick="change_season(0); return false;">All</a></li>
+      <li> <a href="#" data-remote="true" onClick="change_season(1); return false;">Spring</a></li>
+      <li> <a href="#" data-remote="true" onClick="change_season(2); return false;">Summer</a></li>
+      <li> <a href="#" data-remote="true" onClick="change_season(3); return false;">Autumn</a></li>
+      <li> <a href="#" data-remote="true" onClick="change_season(4); return false;">Winter</a></li>
     </ul>
   </div>
   <div class="container">
   <div class="categolly">
     <div class="row">
       <div class="col-md-2 col-sm-2"></div>
-      <div class="col-md-1 col-sm-1"><div class="active"><%= link_to "ALL", category_change_path(category_id:0), controller: "top", remote: true, action: "category_change" %></div></div>
+      <div class="col-md-1 col-sm-1"><div class="active">
+      <a href="#" data-remote="true" onClick="change_category(); return false;">ALL</a>
+      </div></div>
       <div class="col-md-1 col-sm-1"></div>
-      <div class="col-md-1 col-sm-1"><%= link_to "FOOD", category_change_path(category_id:1), controller: "top", remote: true, action: "category_change" %></div>
+      <div class="col-md-1 col-sm-1">
+      <a href="#" data-remote="true" onClick="change_category('food'); return false;">FOOD</a>
+      </div>
       <div class="col-md-1 col-sm-1"></div>
-      <div class="col-md-1 col-sm-1"><%= link_to "SITE", category_change_path(category_id:2), controller: "top", remote: true, action: "category_change" %></div>
+      <div class="col-md-1 col-sm-1">
+      <a href="#" data-remote="true" onClick="change_category('site'); return false;">SITE</a>
+      </div>
       <div class="col-md-1 col-sm-1"></div>
-      <div class="col-md-1 col-sm-1"><%= link_to "ACTIVITY", category_change_path(category_id:3, season:params[:id]), controller: "top", remote: true, action: "category_change" %></div><span></span>
+      <div class="col-md-1 col-sm-1">
+      <a href="#" data-remote="true" onClick="change_category('activity'); return false;">ACTIVITY</a>
+      </div><span></span>
       <div class="col-md-3 col-sm-3"></div>
 
     </div>
@@ -40,7 +47,7 @@
   <div class="container">
 
   <div class="library">
-    <div class="row">
+    <div class="row" id="photo-list">
       <% @photos.each do |photo|%>
         <div class="col-md-4 col-sm-12">
           <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
@@ -59,8 +66,41 @@
 </div>
 </div>
 </div>
+<%= form_tag update_photos_path, id: "form_data_update", remote: true do %>
+<input type="hidden" value="0" name="season" id="season_state">
+<input type="hidden" value="" name="category" id="category_state">
+<% end %>
 
 <script type="text/javascript">
+
+
+var modal_begin = function() {
+  $( 'a[rel*=leanModal]').leanModal({
+        top: 50,                     // モーダルウィンドウの縦位置を指定
+        overlay : 0.5,               // 背面の透明度
+        closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
+    });
+}
+var submit_form = function() {
+  $('#form_data_update').submit();
+}
+
+function change_season(season) {
+  $('#season_state').val(season);
+  submit_form();
+  modal_begin();
+};
+function change_category(c) {
+  if(c == 0) {
+    $('#category_state').val('');
+  } else {
+    $('#category_state').val(c);
+  }
+  submit_form();
+  modal_begin();
+};
+
+
 function set_modal(url, text, liked, id, organization_id) {
   var modal_target = document.getElementById('modal_image');
   var modal_text_target = document.getElementById('modal_text_target');
@@ -78,13 +118,12 @@ function set_modal(url, text, liked, id, organization_id) {
   }
 }
 
-$(function() {
-    $( 'a[rel*=leanModal]').leanModal({
-        top: 50,                     // モーダルウィンドウの縦位置を指定
-        overlay : 0.5,               // 背面の透明度
-        closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
-    });
-});
+
+$(
+
+  modal_begin()
+
+  );
 </script>
 
 <footer>
