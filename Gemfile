@@ -15,7 +15,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_12factor', group: :production
-gem 'dotenv-rails'
+gem 'carrierwave'
+gem 'rmagick'
+gem 'fog'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'dotenv-rails'
