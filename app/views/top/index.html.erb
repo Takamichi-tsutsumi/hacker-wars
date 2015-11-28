@@ -1,9 +1,13 @@
 <h1> Imaja </h1>
+<div id="fb-root"></div>
 
 <%= ENV['FACEBOOK_APP_ID'] %>
 <% if user_signed_in? %>
   <p>Signed in</p>
 <% end %>
+<a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook">
+  <span class="fa fa-facebook"></span>Sign in with Facebook
+</a>
 <%= link_to 'Log In With Facebook', user_omniauth_authorize_path(:facebook) %>
 <%= link_to 'Log Out',destroy_user_session_path, method: :delete  %>
 

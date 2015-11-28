@@ -18,6 +18,7 @@ gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'rmagick'
 gem 'fog'
+gem 'font-awesome-rails'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'dotenv-rails'

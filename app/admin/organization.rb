@@ -13,6 +13,6 @@ ActiveAdmin.register Organization do
 #   permitted
 # end
 
-  permit_params :name, :intro_text, :food_info, :site_info, :activity_info, :address, :temperture, :how_to_go
+  permit_params :name, :intro_text, :food_info, :site_info, :activity_info, :address, :temperture, :how_to_go, :lat, :lng
 
 end
