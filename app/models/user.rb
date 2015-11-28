@@ -27,4 +27,21 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_many :favorite
   has_many :photo
+
+  # facebook認証
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+
+    unless user
+      user = User.create(
+        uid: auth.uid,
+        provider: auth.provider,
+        email: auth.extra.raw_info.email,
+        password: Devise.friendly_token[0, 20],
+        name_facebook: auth.extra.raw_info.name,
+      )
+    end
+
+    user
+  end
 end
