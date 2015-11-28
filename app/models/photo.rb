@@ -13,6 +13,8 @@
 #
 
 class Photo < ActiveRecord::Base
+
+  validates :public_from, presence: true
   belongs_to :category
   belongs_to :organization
   has_many :favorites
