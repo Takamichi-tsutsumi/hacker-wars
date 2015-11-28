@@ -1,21 +1,10 @@
-
-
-
-
-
-<% if user_signed_in? %>
-  <p>Signed in</p>
-<% end %>
-<%= link_to 'Log In With Facebook', user_omniauth_authorize_path(:facebook) %>
-<%= link_to 'Log Out',destroy_user_session_path, method: :delete  %>
-
-<%= link_to 'link', favorite_path(id:12), :remote => true, method: :post %>
-
-
-
   <div class="header-menu" style="width: 100%;">
   <div class="header">
     <img src="img/logo.gif" width="20%" alt="" />
+    <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
+  <span class="fa fa-facebook"></span>Sign in with Facebook
+</a>
+
   </div>
   <div class="season">
     <ul>
@@ -50,60 +39,34 @@
     <div class="row">
       <% @photos.each do |photo|%>
         <div class="col-md-4 col-sm-12">
-<!--           <a rel="leanModal" href="#div787"><img src="img/image1.jpg" width="80%" alt="" /></a> -->
-          <a rel="leanModal" href="#div787"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
+          <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= photo.favorited_by?(current_user) %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
          </div>
-<!--         <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image2.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image3.jpg" width="80%" alt="" /></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image1.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image2.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image3.jpg" width="80%" alt="" /></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image1.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image2.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image3.jpg" width="80%" alt="" /></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image1.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image2.jpg" width="80%" alt="" /></a>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <a href="#"><img src="img/image3.jpg" width="80%" alt="" /></a>
-        </div> -->
       <% end %>
     </div>
   </div>
 </div>
 
-<!-- <div id="div787">
-<img src="img/image1.jpg" width="80%" alt="" /><p>This is so delicious!</p>
+<div id="div787">
+  <img id="modal_image" width="80%" alt="" /><p id="modal_text_target"></p>
 <a href="#"><div id="detail"><p>Detail</p></div></a>
-</div> -->
+<i class="fa fa-heart" style="border: solid 1px #607D8B; padding: 3px 5px; color: #607D8B;" id="modal-like"></i>
 </div>
 </div>
+</div>
+
 <script type="text/javascript">
+function set_modal(url, text, liked) {
+  var modal_target = document.getElementById('modal_image');
+  var modal_text_target = document.getElementById('modal_text_target');
+  var modal_icon = document.getElementById('modal-like');
+  modal_target.setAttribute('src', url);
+  modal_text_target.innerHTML = text;
+  console.log(liked);
+  if(liked=="true") {
+    modal_icon.setAttribute('class', 'liked');
+  }
+}
+
 $(function() {
     $( 'a[rel*=leanModal]').leanModal({
         top: 50,                     // モーダルウィンドウの縦位置を指定
@@ -116,19 +79,4 @@ $(function() {
 <footer>
 <p>Copyright @ Greatfind</p>
 </footer>
-<h1> Imaja </h1>
-<div id="fb-root"></div>
-
-<%= ENV['FACEBOOK_APP_ID'] %>
-<% if user_signed_in? %>
-  <p>Signed in</p>
-<% end %>
-<a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook">
-  <span class="fa fa-facebook"></span>Sign in with Facebook
-</a>
-<%= link_to 'Log In With Facebook', user_omniauth_authorize_path(:facebook) %>
-<%= link_to 'Log Out',destroy_user_session_path, method: :delete  %>
-
-<%= link_to 'link', "/favorite", :remote => true, method: :post, params: { id: 12 } %>
-
 

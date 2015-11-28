@@ -15,7 +15,17 @@
 class Photo < ActiveRecord::Base
   belongs_to :category
   belongs_to :organization
-  has_many :favorite
+  has_many :favorites
+  has_many :users, through: :favorites
 
   mount_uploader :image, PhotoImageUploader
+
+  def favorited_by?(user)
+    unless user
+      p 'no user'
+      return "false"
+    end
+    false
+    return "true" if self.users.include?(user.id)
+  end
 end

@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20151128144851) do
     t.text     "how_to_go",     limit: 65535
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.float    "lat",           limit: 24
+    t.float    "lng",           limit: 24
   end
 
   create_table "photos", force: :cascade do |t|

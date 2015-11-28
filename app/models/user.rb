@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-  has_many :favorite
-  # has_many :photo
+  has_many :favorites
+  has_many :photos, through: :favorites
 
   # facebook認証
   def self.find_for_oauth(auth)
