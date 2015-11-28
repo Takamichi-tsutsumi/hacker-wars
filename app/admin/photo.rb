@@ -12,6 +12,6 @@ ActiveAdmin.register Photo do
 #   permitted << :other if resource.something?
 #   permitted
 # end
-  permit_params :image, :organization_id, :category_id, :season, :text
+  permit_params :image, :organization_id, :category_id, :season, :text, :public_from
 
 end

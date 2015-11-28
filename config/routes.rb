@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "top#index"
-  # post 'favorite/favorite'
+  match 'category_change' => 'top#category_change', :via => :get
+  match 'season_change/:season' => 'top#season_change', :via => :get
   match 'favorite' => 'favorite#favorite', :via => :post
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
