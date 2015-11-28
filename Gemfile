@@ -17,6 +17,8 @@ gem 'omniauth-facebook'
 gem 'rails_12factor', group: :production
 gem 'dotenv-rails'
 
+gem 'activeadmin', github: 'activeadmin'
+
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'unicorn'
