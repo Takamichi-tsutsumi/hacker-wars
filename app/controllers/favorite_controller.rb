@@ -1,7 +1,10 @@
 class FavoriteController < ApplicationController
-  def create
-  end
+  def favorite
+  	@favorite = Favorite.create(user_id: 1, photo_id: params[:id])
 
-  def destroy
+  	respond_to do |format|
+		format.html { render :layout => false }
+		format.js { render :favorite}
+  	end
   end
 end

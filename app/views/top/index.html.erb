@@ -6,3 +6,5 @@
 <% end %>
 <%= link_to 'Log In With Facebook', user_omniauth_authorize_path(:facebook) %>
 <%= link_to 'Log Out',destroy_user_session_path, method: :delete  %>
+
+<%= link_to 'link', "/favorite", :remote => true, method: :post, params: { id: 12 } %>
