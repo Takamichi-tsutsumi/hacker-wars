@@ -1,0 +1,19 @@
+<%= @organization.name %>
+
+<div id="map-canvas" style="width: 500px; height: 500px;"></div>
+
+
+<script>
+  var map_area = document.getElementById("map-canvas");
+  var latlng = new google.maps.LatLng(<%= @organization.lat %>, <%= @organization.lng %>);
+  var options = {
+    zoom: 8,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(map_area, options);
+  var marker = new google.maps.Marker({
+    position: latlng,
+    map: map
+  })
+</script>
