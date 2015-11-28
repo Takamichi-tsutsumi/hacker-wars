@@ -1,6 +1,9 @@
   <div class="header-menu" style="width: 100%;">
   <div class="header">
     <img src="img/logo.gif" width="20%" alt="" />
+
+    <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-danger pull-right sign-out-button", :method => :delete %>
+    <%= link_to "GoToHome", root_path,:class => "btn btn-danger pull-right go-home-button", :method => :get %>
   </div>
   <div class="season">
     <ul>

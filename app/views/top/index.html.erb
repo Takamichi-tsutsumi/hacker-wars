@@ -1,9 +1,13 @@
   <div class="header-menu" style="width: 100%;">
   <div class="header">
     <img src="img/logo.gif" width="20%" alt="" />
+  <% if !current_user %>    
     <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
-  <span class="fa fa-facebook"></span>Sign in with Facebook
-</a>
+      <span class="fa fa-facebook"></span>Sign in with Facebook</a>
+  <% else %>
+      <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-danger pull-right sign-out-button", :method => :delete %>
+  <% end %>
+  
 
   </div>
   <div class="season">
@@ -39,7 +43,7 @@
     <div class="row">
       <% @photos.each do |photo|%>
         <div class="col-md-4 col-sm-12">
-          <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= photo.favorited_by?(current_user) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
+          <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
          </div>
       <% end %>
     </div>
@@ -60,7 +64,7 @@
 function set_modal(url, text, liked, id, organization_id) {
   var modal_target = document.getElementById('modal_image');
   var modal_text_target = document.getElementById('modal_text_target');
-  var modal_icon = document.getElementById('modal-like');
+  var modal_icon = $('#modal-like');
   var link_to_organization = document.getElementById('to-org');
   var favorite_link = document.getElementById('favorite_link');
   favorite_link.setAttribute('href', '/favorite' + '?photo_id=' + id);
@@ -68,7 +72,9 @@ function set_modal(url, text, liked, id, organization_id) {
   modal_target.setAttribute('src', url);
   modal_text_target.innerHTML = text;
   if(liked=="true") {
-    modal_icon.setAttribute('class', 'liked');
+    modal_icon.addClass('liked');
+  }else{
+    modal_icon.removeClass('liked');
   }
 }
 
