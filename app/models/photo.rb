@@ -16,4 +16,6 @@ class Photo < ActiveRecord::Base
   belongs_to :category
   belongs_to :organization
   has_many :favorite
+
+  mount_uploader :image, PhotoImageUploader
 end
