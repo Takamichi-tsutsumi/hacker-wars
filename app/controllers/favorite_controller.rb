@@ -8,7 +8,7 @@ class FavoriteController < ApplicationController
   		end
   	else
 
-	  	@favorite = Favorite.create(user_id: 1, photo_id: params[:id])
+	  	@favorite = Favorite.create(user_id: crrent_user.id, photo_id: params[:id])
 
 	  	respond_to do |format|
 			format.html { render :layout => false }
