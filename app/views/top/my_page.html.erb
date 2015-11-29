@@ -32,15 +32,12 @@
   </div>  
   
   <div class = "row">
+
+<% @recommend_photos.each do |photo| %>
   <div class="col-md-4 col-sm-12">
-    <a rel="leanModal" href="#div787" onClick="set_modal('<%= @recommend_photos[0].image.to_s %>', '<%= @recommend_photos[0].text.to_s %>', '<%= user_favorite_check(current_user, @recommend_photos[0].id) %>', '<%= @recommend_photos[0].id %>', '<%= @recommend_photos[0].organization.id %>')"><%= image_tag(@recommend_photos[0].image, :width => "80%", :alt => "" ) %></a>
+    <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
     </div>
-  <div class="col-md-4 col-sm-12" onClick="set_modal('<%= @recommend_photos[1].image.to_s %>', '<%= @recommend_photos[1].text.to_s %>', '<%= user_favorite_check(current_user, @recommend_photos[1].id) %>', '<%= @recommend_photos[1].id %>', '<%= @recommend_photos[1].organization.id %>')">
-    <a rel="leanModal" href="#div787"><%= image_tag(@recommend_photos[1].image, :width => "80%", :alt => "" ) %></a>
-    </div>
-  <div class="col-md-4 col-sm-12" onClick="set_modal('<%= @recommend_photos[2].image.to_s %>', '<%= @recommend_photos[2].text.to_s %>', '<%= user_favorite_check(current_user, @recommend_photos[2].id) %>', '<%= @recommend_photos[2].id %>', '<%= @recommend_photos[2].organization.id %>')">
-    <a rel="leanModal" href="#div787"><%= image_tag(@recommend_photos[2].image, :width => "80%", :alt => "" ) %></a>
-  </div>
+  <% end %>
   </div>
   </div>
 
