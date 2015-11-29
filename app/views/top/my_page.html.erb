@@ -5,64 +5,55 @@
     <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-danger pull-right sign-out-button", :method => :delete %>
     <%= link_to "GoToHome", root_path,:class => "btn btn-danger pull-right go-home-button", :method => :get %>
   </div>
-  <div class="season">
-    <ul>
-      <div class="active"><li><%= link_to "All", "/season_change/0" %></li></div>
-      <li><%= link_to "Spring", "/season_change/1"  %></li>
-      <li><%= link_to "Summer", "/season_change/2"  %></li>
-      <li><%= link_to "Autum", "/season_change/3"  %></li>
-      <li><%= link_to "Winter", "/season_change/4"  %></li>
-    </ul>
-  </div>
-  <div class="container">
-  <div class="categolly">
-    <div class="row">
-      <div class="col-md-2 col-sm-2"></div>
-      <div class="col-md-1 col-sm-1"><div class="active"><%= link_to "ALL", category_change_path(category_id:0), controller: "top", remote: true, action: "category_change" %></div></div>
-      <div class="col-md-1 col-sm-1"></div>
-      <div class="col-md-1 col-sm-1"><%= link_to "FOOD", category_change_path(category_id:1), controller: "top", remote: true, action: "category_change" %></div>
-      <div class="col-md-1 col-sm-1"></div>
-      <div class="col-md-1 col-sm-1"><%= link_to "SITE", category_change_path(category_id:2), controller: "top", remote: true, action: "category_change" %></div>
-      <div class="col-md-1 col-sm-1"></div>
-      <div class="col-md-1 col-sm-1"><%= link_to "ACTIVITY", category_change_path(category_id:3, season:params[:id]), controller: "top", remote: true, action: "category_change" %></div><span></span>
-      <div class="col-md-3 col-sm-3"></div>
-
-      </div>
-    </div>
-  </div>
   </div>
 
   <div class="container">
 
   <div class="library">
+  <div class="main">
+    
+  <h2>Your Favorite Photos</h1>
+  <hr>
+  </div>
     <div class="row">
       <% @photos.each do |photo|%>
         <div class="col-md-4 col-sm-12">
-          <a rel="leanModal" href="#div787"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
+          <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
          </div>
         <% end %>
       </div>
     </div>
   </div>
-  <div class = "col-md-12 bg-info text-center"><h4>recommend!</h4></div>
+  <div class="container">
+  <div class="main">
+    <h2>Recommend!!</h2>
+    <hr>
+
+  </div>  
+  
   <div class = "row">
   <div class="col-md-4 col-sm-12">
-    <a rel="leanModal" href="#div787"><%= image_tag(@recommend_photos[0].image, :width => "80%", :alt => "" ) %></a>
+    <a rel="leanModal" href="#div787" onClick="set_modal('<%= @recommend_photos[0].image.to_s %>', '<%= @recommend_photos[0].text.to_s %>', '<%= user_favorite_check(current_user, @recommend_photos[0].id) %>', '<%= @recommend_photos[0].id %>', '<%= @recommend_photos[0].organization.id %>')"><%= image_tag(@recommend_photos[0].image, :width => "80%", :alt => "" ) %></a>
     </div>
-  <div class="col-md-4 col-sm-12">
+  <div class="col-md-4 col-sm-12" onClick="set_modal('<%= @recommend_photos[1].image.to_s %>', '<%= @recommend_photos[1].text.to_s %>', '<%= user_favorite_check(current_user, @recommend_photos[1].id) %>', '<%= @recommend_photos[1].id %>', '<%= @recommend_photos[1].organization.id %>')">
     <a rel="leanModal" href="#div787"><%= image_tag(@recommend_photos[1].image, :width => "80%", :alt => "" ) %></a>
     </div>
-  <div class="col-md-4 col-sm-12">
+  <div class="col-md-4 col-sm-12" onClick="set_modal('<%= @recommend_photos[2].image.to_s %>', '<%= @recommend_photos[2].text.to_s %>', '<%= user_favorite_check(current_user, @recommend_photos[2].id) %>', '<%= @recommend_photos[2].id %>', '<%= @recommend_photos[2].organization.id %>')">
     <a rel="leanModal" href="#div787"><%= image_tag(@recommend_photos[2].image, :width => "80%", :alt => "" ) %></a>
   </div>
   </div>
+  </div>
 
-
-<!-- <div id="div787">
-<img src="img/image1.jpg" width="80%" alt="" /><p>This is so delicious!</p>
-<a href="#"><div id="detail"><p>Detail</p></div></a>
-</div> -->
 </div>
+</div>
+
+
+<div id="div787">
+  <img id="modal_image" alt="" /><p id="modal_text_target"></p>
+<a href="" id="to-org"><div id="detail"><p>Area Detail</p></div></a>
+<%= link_to favorite_path, method: :post, remote: true, id: "favorite_link" do %>
+<i class="fa fa-heart" style="border: solid 1px #607D8B; padding: 3px 5px; color: #607D8B;" id="modal-like"></i>
+<% end %>
 </div>
 <script type="text/javascript">
 $(function() {
@@ -72,5 +63,22 @@ $(function() {
         closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
     });
 });
+
+function set_modal(url, text, liked, id, organization_id) {
+  var modal_target = document.getElementById('modal_image');
+  var modal_text_target = document.getElementById('modal_text_target');
+  var modal_icon = $('#modal-like');
+  var link_to_organization = document.getElementById('to-org');
+  var favorite_link = document.getElementById('favorite_link');
+  favorite_link.setAttribute('href', '/favorite' + '?photo_id=' + id);
+  link_to_organization.setAttribute('href', '/organizations/' + organization_id);
+  modal_target.setAttribute('src', url);
+  modal_text_target.innerHTML = text;
+  if(liked=="true") {
+    modal_icon.addClass('liked');
+  }else{
+    modal_icon.removeClass('liked');
+  }
+}
 </script>
 

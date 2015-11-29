@@ -1,11 +1,11 @@
   <div class="header-menu" style="width: 100%;">
   <div class="header">
-    <img src="img/logo.gif" width="20%" alt="" />
+    <img src="img/logo.gif" width="20%" alt="" id="logo" />
   <% if !current_user %>    
     <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
-
       <span class="fa fa-facebook"></span>Sign in with Facebook</a>
   <% else %>
+      <%= link_to "MyPage", mypage_path,:class => "btn btn-danger pull-right sign-out-button" %>
       <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-danger pull-right sign-out-button", :method => :delete %>
   <% end %>
   </div>
@@ -58,7 +58,7 @@
 </div>
 
 <div id="div787">
-  <img id="modal_image" width="80%" alt="" /><p id="modal_text_target"></p>
+  <img id="modal_image" alt="" /><p id="modal_text_target"></p>
 <a href="" id="to-org"><div id="detail"><p>Area Detail</p></div></a>
 <%= link_to favorite_path, method: :post, remote: true, id: "favorite_link" do %>
 <i class="fa fa-heart" style="border: solid 1px #607D8B; padding: 3px 5px; color: #607D8B;" id="modal-like"></i>
@@ -70,6 +70,14 @@
 <input type="hidden" value="0" name="season" id="season_state">
 <input type="hidden" value="" name="category" id="category_state">
 <% end %>
+<div id="not-login" style="z-index: 200000000; position: fixed; top: 30; left: 30;">
+<a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="top: 5px; text-decoration: none; color: white;">
+      <span class="fa fa-facebook"></span>Sign in with Facebook</a>
+  <p>You can save your favorite Photos in your MyPage!!</br>
+   And We also recommend you other photos!!</p>
+</div>
+
+
 
 <script type="text/javascript">
 
@@ -120,8 +128,6 @@ function set_modal(url, text, liked, id, organization_id) {
 
 
 $(
-
   modal_begin()
-
   );
 </script>
