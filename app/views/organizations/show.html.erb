@@ -1,13 +1,158 @@
-<%= @organization.name %>
+<style>
+  .invisible {
+    display: none;
+  }
+  header{
+  background: url('<%= @organization.header_image %>');
+  background-size:100%;
+  background-repeat: no-repeat;
+  height:300px;
+}
+.main-photo {
+  width: 80%;
+}
+</style>
 
-<div id="map-canvas" style="width: 500px; height: 500px;"></div>
+<div id="overview">
+<header>
+<a href="<%= root_path %>">
+  <img src="/img/logo2.gif" width="10%" alt="" />
+</a>
+  <h1>Kamifukuoka</h1>
+</header>
+<div class="container">
+  <div class="main">
+    <h2>Overview</h2>
+    <div class="row">
+    <div class="col-md-6 col-sm-12">
+    <div class="main2">
+      <%= image_tag @organization.photos.first.image, class: "main-photo" %>
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="main2">
+      <p>
+        <%=raw @organization.intro_text %>
+      </p>
+    </div>
+    </div>
+    </div>
+  <div class="eachpoint">
+    <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <h3>FOOD</h3>
+      <%= image_tag @images["food"].image, class: "main-photo" %>
+      <p>
+        <%= @organization.food_info %>
+      </p>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <h3>SITE</h3>
+      <%= image_tag @images["site"].image, class: "main-photo" %>
+      <p>
+        <%= @organization.site_info %>
+      </p>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <h3>ACTIVITY</h3>
+      <%= image_tag @images["activity"].image, class: "main-photo" %>
+      <p>
+      <%= @organization.activity_info %>
+      </p>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="garally">
+   <h2>Garally</h2>
+   <div class="row">
+     <% @organization.photos.reverse[0..3].each do |photo| %>
+    <div class="col-md-3 col-sm-6">
+    <%= image_tag photo.image, class: "main-photo" %>
+    </div>
+    <% end %>
+   </div>
+ </div>
+</div>
+<div class="info-mark">
+  <a href="#" onClick="to_info(); return false;"><img src="/img/info.gif" width="60px" alt="" /></a>
+  </div>
+
+</div>
+</div>
+
+<div id="info" class="invisible">
+  
+<header>
+<a href="<%= root_path %>">
+  <img src="/img/logo2.gif" width="10%" alt="" />
+</a>
+  <h1>Kamifukuoka</h1>
+</header>
+<div class="container">
+  <div class="access">
+    <h2>Access</h2>
+    <div class="row">
+    <div class="col-md-6 col-sm-12">
+    <div class="access2" id="map-canvas" style="width: 400px; height: 400px; margin-top: 50px;"></div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="access2" style="text-align:left;">
+      <p>
+        <i class="fa fa-map-marker"></i> <%= @organization.address %>
+      </p></br>
+      <p>
+        <i class="fa fa-bus"></i> <%= @organization.how_to_go %>
+      </p>
+      </p>
+    </div>
+    </div>
+    </div>
+  </div>
+  <div class="climate">
+    <h2>Climate</h2>
+    <div class="row">
+
+    <div class="col-md-6 col-sm-12">
+      <div class="climate2">
+      <p>
+      <%=raw @organization.temperture %>
+      </p>
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+    <div class="climate2">
+      <img src="/img/climategraph.jpg" width="80%" alt="" />
+    </div>
+    </div>
+    </div>
+  </div>
+  </div>
+
+
+<div class="info-mark">
+  <a href="#" onClick="to_overview(); return false;"><img src="/img/detail.gif" width="60px" alt="" /></a>
+</div>
+
+</div>
 
 
 <script>
+
+function to_overview() {
+  $('#info').addClass('invisible');
+  $('#overview').removeClass('invisible');
+}
+function to_info() {
+  $('#overview').addClass('invisible');
+  $('#info').removeClass('invisible');
+  show_map();
+}
+function show_map() {
   var map_area = document.getElementById("map-canvas");
   var latlng = new google.maps.LatLng(<%= @organization.lat %>, <%= @organization.lng %>);
   var options = {
-    zoom: 8,
+    zoom: 10,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -16,4 +161,5 @@
     position: latlng,
     map: map
   })
+}
 </script>

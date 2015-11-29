@@ -16,4 +16,6 @@
 #
 
 class Organization < ActiveRecord::Base
+	has_many :photos
+	mount_uploader :header_image, PhotoImageUploader
 end
