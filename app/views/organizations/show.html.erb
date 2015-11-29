@@ -50,21 +50,21 @@
       <h3>FOOD</h3>
       <%= image_tag @images["food"].image, class: "main-photo" %>
       <p>
-        <%= @organization.food_info %>
+        <%=raw @organization.food_info %>
       </p>
     </div>
     <div class="col-md-4 col-sm-12">
       <h3>SITE</h3>
       <%= image_tag @images["site"].image, class: "main-photo" %>
       <p>
-        <%= @organization.site_info %>
+        <%=rawa @organization.site_info %>
       </p>
     </div>
     <div class="col-md-4 col-sm-12">
       <h3>ACTIVITY</h3>
       <%= image_tag @images["activity"].image, class: "main-photo" %>
       <p>
-      <%= @organization.activity_info %>
+      <%=raw @organization.activity_info %>
       </p>
     </div>
   </div>
