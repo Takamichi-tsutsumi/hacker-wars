@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
         provider: auth.provider,
         email: auth.extra.raw_info.email,
         password: Devise.friendly_token[0, 20],
-        name_facebook: auth.extra.raw_info.name,
+        name_facebook: "aiueo",
       )
     end
 

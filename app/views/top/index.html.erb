@@ -1,6 +1,8 @@
   <div class="header-menu" style="width: 100%;">
   <div class="header">
+  <a href="<%= root_path %>">
     <img src="img/logo.gif" width="20%" alt="" id="logo" />
+  </a>
   <% if !current_user %>    
     <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
       <span class="fa fa-facebook"></span>Sign in with Facebook</a>
