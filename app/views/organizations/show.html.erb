@@ -6,8 +6,15 @@
   background: url('<%= @organization.header_image %>');
   background-size:100%;
   background-repeat: no-repeat;
-  height:300px;
+  height:200px;
 }
+@media screen and (min-width: 641px) {
+  header {
+    height: 300px;
+  }
+}
+
+
 .main-photo {
   width: 80%;
 }

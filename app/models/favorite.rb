@@ -10,7 +10,7 @@
 #
 
 class Favorite < ActiveRecord::Base
-	validates :user_id, uniquness: {scope: [:photo_id]}
+	validates :user_id, uniqueness: {scope: [:photo_id]}
 	belongs_to :user
 	belongs_to :photo
 end

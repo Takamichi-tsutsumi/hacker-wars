@@ -52,6 +52,7 @@ a{
 
 a:hover{
 	color:#000000;
+	text-decoration: none;
 }
 
 /* 画像リンクの設定 */
@@ -108,8 +109,9 @@ a img{
 	text-decoration: none;
 }
 
-.season .active li{
+.season li.active{
 	background-color: #080808;
+	color: white;
 }
 
 .season .active li a{
@@ -139,6 +141,14 @@ a img{
 
 .categolly a{
 	text-decoration: none;
+}
+
+.categolly a:hover {
+	text-decoration: none;
+}
+
+.categolly a:visited{
+	color:#000000;
 }
 
 /*写真ライブラリ*/
@@ -233,3 +243,5 @@ footer p{
 	text-align: center;
 	color: #ffffff;
 }
+
+

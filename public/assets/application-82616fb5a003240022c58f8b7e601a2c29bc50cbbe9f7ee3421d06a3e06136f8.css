@@ -53,6 +53,7 @@ a{
 
 a:hover{
 	color:#000000;
+	text-decoration: none;
 }
 
 /* 画像リンクの設定 */
@@ -109,8 +110,9 @@ a img{
 	text-decoration: none;
 }
 
-.season .active li{
+.season li.active{
 	background-color: #080808;
+	color: white;
 }
 
 .season .active li a{
@@ -140,6 +142,14 @@ a img{
 
 .categolly a{
 	text-decoration: none;
+}
+
+.categolly a:hover {
+	text-decoration: none;
+}
+
+.categolly a:visited{
+	color:#000000;
 }
 
 /*写真ライブラリ*/
@@ -234,6 +244,8 @@ footer p{
 	text-align: center;
 	color: #ffffff;
 }
+
+
 @charset "UTF-8";
 /*-----------------------------
 
@@ -330,7 +342,7 @@ a img {
 /*ヘッダー*/
 /* line 82, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 header h1 {
-  padding: 120px 0;
+  padding: 90px 0;
   text-align: center;
   color: #ffffff;
   font-size: 40px;
@@ -338,7 +350,13 @@ header h1 {
   letter-spacing: 0.1em;
 }
 
-/* line 91, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+@media screen and (min-width: 641px) {
+  /* line 92, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+  header h1 {
+    padding: 120px 0;
+  }
+}
+/* line 97, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .info-mark img {
   position: fixed;
   top: 20px;
@@ -346,22 +364,22 @@ header h1 {
 }
 
 /*メイン*/
-/* line 98, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 104, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .main {
   margin-top: 10px;
 }
 
-/* line 102, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 108, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .main h2 {
   font-weight: bold;
   font-size: 30px;
   text-align: left;
-  margin: 60px 0 0 0;
+  margin: 30px 0 0 0;
   padding-left: 20px;
   border-left: #000000 5px solid;
 }
 
-/* line 111, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 117, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .main2 {
   display: table-cell;
   height: 500px;
@@ -369,7 +387,7 @@ header h1 {
   text-align: center;
 }
 
-/* line 118, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 124, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .main2 p {
   display: inline-block;
   text-align: left;
@@ -378,19 +396,19 @@ header h1 {
 }
 
 /*各ポイント*/
-/* line 126, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 132, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .eachpoint {
   text-align: center;
 }
 
-/* line 130, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 136, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .eachpoint h3 {
   font-size: 20px;
   margin: 20px auto;
   font-weight: bold;
 }
 
-/* line 136, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 142, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .eachpoint p {
   text-align: left;
   margin-top: 20px;
@@ -399,13 +417,13 @@ header h1 {
 }
 
 /*ギャラリー*/
-/* line 144, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 150, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .garally {
   text-align: center;
   margin-top: 50px;
 }
 
-/* line 149, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 155, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .garally h2 {
   font-weight: bold;
   font-size: 30px;
@@ -415,20 +433,20 @@ header h1 {
   border-left: #000000 5px solid;
 }
 
-/* line 158, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 164, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .garally img {
   padding: 10px;
 }
 
 /*フッター*/
-/* line 165, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 171, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 footer {
   background-color: #080808;
   margin-bottom: 1px;
   margin-top: 50px;
 }
 
-/* line 171, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 177, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 footer p {
   padding: 10px 0;
   font-size: 12px;
@@ -436,26 +454,7 @@ footer p {
   color: #ffffff;
 }
 
-/*ヘッダー*/
-/* line 181, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
-header {
-  background: url(img/header2.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  height: 300px;
-}
-
-/* line 188, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
-header h1 {
-  padding: 120px 0;
-  text-align: center;
-  color: #ffffff;
-  font-size: 40px;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-}
-
-/* line 197, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 185, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .info-mark img {
   position: fixed;
   top: 20px;
@@ -463,22 +462,22 @@ header h1 {
 }
 
 /*アクセス*/
-/* line 204, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 192, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .access {
   margin-top: 10px;
 }
 
-/* line 208, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 196, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .access h2 {
   font-weight: bold;
   font-size: 30px;
   text-align: left;
-  margin: 60px 0 0 0;
+  margin: 30px 0 0 0;
   padding-left: 20px;
   border-left: #000000 5px solid;
 }
 
-/* line 217, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 205, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .access2 {
   display: table-cell;
   height: 500px;
@@ -486,7 +485,7 @@ header h1 {
   text-align: center;
 }
 
-/* line 225, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 213, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .access2 p {
   display: inline-block;
   text-align: left;
@@ -494,18 +493,18 @@ header h1 {
   line-height: 1.5em;
 }
 
-/* line 232, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 220, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .access2 i {
   margin-right: 20px;
 }
 
 /*グラフ*/
-/* line 237, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 225, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .climate {
   margin-top: 10px;
 }
 
-/* line 241, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 229, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .climate h2 {
   font-weight: bold;
   font-size: 30px;
@@ -515,7 +514,7 @@ header h1 {
   border-left: #000000 5px solid;
 }
 
-/* line 250, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 238, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .climate2 {
   display: table-cell;
   height: 500px;
@@ -523,7 +522,7 @@ header h1 {
   text-align: center;
 }
 
-/* line 258, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 246, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 .climate2 p {
   display: inline-block;
   text-align: left;
@@ -532,14 +531,14 @@ header h1 {
 }
 
 /*フッター*/
-/* line 267, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 255, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 footer {
   background-color: #080808;
   margin-bottom: 1px;
   margin-top: 50px;
 }
 
-/* line 273, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
+/* line 261, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/organizations.scss */
 footer p {
   padding: 10px 0;
   font-size: 12px;
