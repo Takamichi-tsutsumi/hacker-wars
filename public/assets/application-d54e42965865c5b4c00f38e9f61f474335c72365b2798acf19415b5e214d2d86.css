@@ -561,6 +561,37 @@ footer p {
   margin-top: 15px;
   margin-right: 1px;
 }
+
+/* line 19, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/top.scss */
+#not-login-overlay {
+  z-index: 13000;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(2, 2, 2, 0.5);
+  display: none;
+}
+
+/* line 30, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/top.scss */
+#not-loggedin {
+  margin: 300px auto;
+  text-align: center;
+  background: #ffffff;
+  width: 40%;
+  height: 200px;
+  border-radius: 2px;
+  border: 2px solid #202020;
+}
+
+/* line 40, /Users/Takamichi/development/hacker-wars/app/assets/stylesheets/top.scss */
+#not-loggedin p {
+  padding: 30px;
+  font-size: 20px;
+  text-align: left;
+  margin: auto;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
