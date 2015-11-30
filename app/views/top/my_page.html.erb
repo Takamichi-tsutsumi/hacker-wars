@@ -1,9 +1,11 @@
   <div class="header-menu" style="width: 100%;">
   <div class="header">
+    <a href="<%= root_path %>">
     <img src="img/logo.gif" width="20%" alt="" />
+    </a>
 
     <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-default pull-right sign-out-button", :method => :delete %>
-    <%= link_to "GoToHome", root_path,:class => "btn btn-default pull-right go-home-button", :method => :get %>
+    <%= link_to "Home", root_path,:class => "btn btn-default pull-right go-home-button", :method => :get %>
   </div>
   </div>
 
@@ -18,7 +20,7 @@
     <div class="row">
       <% @photos.each do |photo|%>
         <div class="col-md-4 col-sm-12">
-          <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
+          <a rel="leanModal" href="#modal-area" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
          </div>
         <% end %>
       </div>
@@ -35,7 +37,7 @@
   <div class = "row">
 <% @recommend_photos.limit(3).each do |photo| %>
   <div class="col-md-4 col-sm-12">
-    <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
+    <a rel="leanModal" href="#modal-area" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
     </div>
   <% end %>
   </div>
@@ -45,14 +47,7 @@
 </div>
 </div>
 
-
-<div id="div787">
-  <img id="modal_image" alt="" /><p id="modal_text_target"></p>
-<a href="" id="to-org"><div id="detail"><p>Area Detail</p></div></a>
-<%= link_to favorite_path, method: :post, remote: true, id: "favorite_link" do %>
-<i class="fa fa-heart" style="border: solid 1px #607D8B; padding: 3px 5px; color: #607D8B;" id="modal-like"></i>
-<% end %>
-</div>
+<%= render "shared/photo_modal" %>
 <script type="text/javascript">
 $(function() {
     $( 'a[rel*=leanModal]').leanModal({

@@ -73,9 +73,12 @@
   <div class="garally">
    <h2>Garally</h2>
    <div class="row">
-     <% @organization.photos.reverse[0..3].each do |photo| %>
+     <% @organization.photos.each do |photo| %>
     <div class="col-md-3 col-sm-6">
+<a href="#modal-area" rel="leanModal" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')">
     <%= image_tag photo.image, class: "main-photo" %>
+</a>
+
     </div>
     <% end %>
    </div>
@@ -137,12 +140,21 @@
   </div>
 
 
+
+
 <div class="info-mark">
   <a href="#" onClick="to_overview(); return false;"><img src="/img/detail.gif" width="60px" alt="" /></a>
 </div>
 
 </div>
 
+<div id="modal-area">
+  <img id="modal_image" alt="" /><p id="modal_text_target"></p>
+<a href="" id="to-org"><div id="detail"><p>Area Detail</p></div></a>
+<%= link_to favorite_path, method: :post, remote: true, id: "favorite_link" do %>
+<i class="fa fa-heart fa-2x" style="color: #607D8B; float: right;" id="modal-like"></i>
+<% end %>
+</div>
 
 <script>
 
@@ -169,4 +181,31 @@ function show_map() {
     map: map
   })
 }
+
+$( 'a[rel*=leanModal]').leanModal({
+  top: 50,                     // モーダルウィンドウの縦位置を指定
+  overlay : 0.5,               // 背面の透明度
+  closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
+});
+
+
+
+function set_modal(url, text, liked, id, organization_id) {
+  var modal_target = document.getElementById('modal_image');
+  var modal_text_target = document.getElementById('modal_text_target');
+  var modal_icon = $('#modal-like');
+  var link_to_organization = document.getElementById('to-org');
+  var favorite_link = document.getElementById('favorite_link');
+  favorite_link.setAttribute('href', '/favorite' + '?photo_id=' + id);
+  link_to_organization.setAttribute('href', '/organizations/' + organization_id);
+  modal_target.setAttribute('src', url);
+  modal_text_target.innerHTML = text;
+  if(liked=="true") {
+    modal_icon.addClass('liked');
+  }else{
+    modal_icon.removeClass('liked');
+  }
+}
+
+
 </script>

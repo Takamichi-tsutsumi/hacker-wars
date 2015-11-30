@@ -171,7 +171,7 @@ a img{
   background: #000;
   display: none;
 }
-#div787{
+#modal-area{
   background: none repeat scroll 0 0 #FFFFFF;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
   display: none;
@@ -179,25 +179,25 @@ a img{
   width: 90%;
  }
 
- #div787 img{
+ #modal-area img{
 	 display:block;
 	 margin:0 auto;
 	 width: 80%;
  }
 
- #div787 p{
+ #modal-area p{
 	 text-align: center;
 	 margin-top: 20px;
 	 font-size: 14px;
  }
 
  @media screen and (min-width: 641px) {
- 	#div787 {
+ 	#modal-area {
  		padding: 30px;
  		width: 60%;
  	}
 
- 	#div787 img {
+ 	#modal-area img {
  		width: 60%;
  	}
  }

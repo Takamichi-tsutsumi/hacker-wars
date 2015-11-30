@@ -4,7 +4,7 @@
     <img src="img/logo.gif" width="20%" alt="" id="logo" />
   </a>
   <% if !current_user %>    
-    <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
+    <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 20px; right: 15px; text-decoration: none; color: white;">
       <span class="fa fa-facebook"></span>Sign in with Facebook</a>
   <% else %>
       <%= link_to "MyPage", mypage_path,:class => "btn-default btn pull-right sign-out-button" %>
@@ -52,20 +52,15 @@
     <div class="row" id="photo-list">
       <% @photos.each do |photo|%>
         <div class="col-md-4 col-sm-12">
-          <a rel="leanModal" href="#div787" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
+          <a rel="leanModal" href="#modal-area" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
          </div>
       <% end %>
     </div>
   </div>
 </div>
 
-<div id="div787">
-  <img id="modal_image" alt="" /><p id="modal_text_target"></p>
-<a href="" id="to-org"><div id="detail"><p>Area Detail</p></div></a>
-<%= link_to favorite_path, method: :post, remote: true, id: "favorite_link" do %>
-<i class="fa fa-heart fa-2x" style="color: #607D8B; float: right;size: 15px;" id="modal-like"></i>
-<% end %>
-</div>
+
+<%= render "shared/photo_modal" %>
 </div>
 </div>
 <%= form_tag update_photos_path, id: "form_data_update", remote: true do %>
@@ -80,12 +75,7 @@
   <button class="btn btn-danger" onClick="$('#not-login-overlay').fadeOut()">not for now</button>
   </div>
 </div>
-
-
-
 <script type="text/javascript">
-
-
 var modal_begin = function() {
   $( 'a[rel*=leanModal]').leanModal({
         top: 50,                     // モーダルウィンドウの縦位置を指定
