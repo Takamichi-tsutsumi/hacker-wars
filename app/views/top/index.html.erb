@@ -72,11 +72,13 @@
 <input type="hidden" value="0" name="season" id="season_state">
 <input type="hidden" value="" name="category" id="category_state">
 <% end %>
-<div id="not-login" style="z-index: 200000000; position: fixed; top: 30; left: 30;">
-<a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="top: 5px; text-decoration: none; color: white;">
+<div id="not-login-overlay">
+  <div id="not-loggedin">
+    <p>You need to log in to save your Favorite photos!!</p>
+  <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="text-decoration: none; color: white;">
       <span class="fa fa-facebook"></span>Sign in with Facebook</a>
-  <p>You can save your favorite Photos in your MyPage!!</br>
-   And We also recommend you other photos!!</p>
+  <button class="btn btn-danger" onClick="$('#not-login-overlay').fadeOut()">not for now</button>
+  </div>
 </div>
 
 
