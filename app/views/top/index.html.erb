@@ -7,8 +7,8 @@
     <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-social btn-facebook" style="float: right; top: 5px; right: 5px; text-decoration: none; color: white;">
       <span class="fa fa-facebook"></span>Sign in with Facebook</a>
   <% else %>
-      <%= link_to "MyPage", mypage_path,:class => "btn btn-danger pull-right sign-out-button" %>
-      <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-danger pull-right sign-out-button", :method => :delete %>
+      <%= link_to "MyPage", mypage_path,:class => "btn-default btn pull-right sign-out-button" %>
+      <%= link_to "SignOut", destroy_user_session_path,:class => "btn btn-default pull-right sign-out-button", :method => :delete %>
   <% end %>
   </div>
   <div class="season">
@@ -63,7 +63,7 @@
   <img id="modal_image" alt="" /><p id="modal_text_target"></p>
 <a href="" id="to-org"><div id="detail"><p>Area Detail</p></div></a>
 <%= link_to favorite_path, method: :post, remote: true, id: "favorite_link" do %>
-<i class="fa fa-heart" style="border: solid 1px #607D8B; padding: 3px 5px; color: #607D8B;" id="modal-like"></i>
+<i class="fa fa-heart fa-2x" style="color: #607D8B; float: right;size: 15px;" id="modal-like"></i>
 <% end %>
 </div>
 </div>
