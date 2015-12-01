@@ -15,4 +15,5 @@
  *= require bootstrap
  *= require bootstrap-social
  *= require font-awesome
+ *= stub 'active_admin'
  */
