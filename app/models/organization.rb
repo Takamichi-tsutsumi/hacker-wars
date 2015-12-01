@@ -16,6 +16,15 @@
 #
 
 class Organization < ActiveRecord::Base
+  validates :name, presence: true
+  validates :intro_text, presence: true
+  validates :food_info, presence: true
+  validates :site_info, presence: true
+  validates :activity_info, presence: true
+  validates :address, presence: true
+  validates :how_to_go, presence: true
+  validates :temperture, presence: true
+
 	has_many :photos
 	mount_uploader :header_image, PhotoImageUploader
 end
