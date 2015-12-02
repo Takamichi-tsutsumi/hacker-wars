@@ -6,11 +6,21 @@ class TopController < ApplicationController
   end
 
   def update_photos
-    category = Category.where(name: params[:category]).first
-    p params[:season].to_i == 0
-    @photos = Photo.all if params[:season].to_i == 0
-    @photos = Photo.where(season: params[:season]) unless params[:season].to_i == 0
-    @photos = @photos.where(category_id: category.id) if category
+    if !params[:category].blank?
+      category = Category.where(name: params[:category]).first
+      if params[:season].to_i == 0
+        @photos = Photo.where(category_id: category.id)
+      else
+        @photos = Photo.where(season: params[:season]).where(category_id: category.id)
+      end
+    else
+      if params[:season].to_i == 0
+        @photos = Photo.all
+      else
+        @photos = Photo.where(season: params[:season])
+      end
+    end
+
     respond_to do |format|
       format.js {render 'update_photos'}
       # format.html {render 'index'}
@@ -57,8 +67,8 @@ class TopController < ApplicationController
   		recommend = []
   	end
 
-  	if !recommend.empty?
-  		@recommend_photos = Photo.all.where(season: recommend[0], category_id:recommend[1]).reverse
+  	unless recommend.empty?
+  		@recommend_photos = Photo.where(season: recommend[0], category_id:recommend[1]).reverse
   		if @recommend_photos.count < 3
   			@recommend_photos = Photo.order("created_at DESC")
   		end
