@@ -1,5 +1,10 @@
 class TopController < ApplicationController
 
+	def react_index
+		@photos = Photo.all
+	end
+
+
   def index
   	@photo = Photo.all
   	@photos = Photo.order('created_at DESC').where(created_at:Time.new(2014, 11, 28, 1, 1, 0, "+09:00")..(Time.now))
