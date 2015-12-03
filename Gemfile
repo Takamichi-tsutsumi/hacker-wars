@@ -23,6 +23,8 @@ gem 'font-awesome-rails'
 gem 'activeadmin', github: 'activeadmin'
 gem 'dotenv-rails'
 
+gem 'react-rails', '~> 1.5.0'
+
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'unicorn'

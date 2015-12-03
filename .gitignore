@@ -27,5 +27,6 @@ doc/
 *.swp
 *~
 .env
+.rbenv-gemsets
 
 
