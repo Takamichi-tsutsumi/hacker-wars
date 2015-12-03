@@ -53,8 +53,8 @@ var Main = React.createClass({
 
 var PhotoItems = React.createClass({
     render: function() {
-        var list = this.props.photoData.map(function(photoData) {
-            return <Photo {...photoData} />
+        var list = this.props.photoData.map(function(photo) {
+            return <Photo {...photo} key={photo.id} />
         });
        return <div className="row" id="photo-list">
            {list}
@@ -78,7 +78,7 @@ var Photo = React.createClass({
     render: function() {
         return <div className="col-md-4 col-sm-12">
             <a href="#" onClick={this.modalBegin} >
-                <img src={this.props.imgUrl} alt="photo Image"/>
+                <img src={this.props.image.url} alt="photo Image" style={{width: "80%"}} />
             </a>
         </div>
     }
