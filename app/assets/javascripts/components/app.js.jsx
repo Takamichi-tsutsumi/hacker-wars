@@ -1,11 +1,14 @@
 
 var App = React.createClass({
-    loadPhotosFromServer: function() {
+    loadPhotosFromServer: function(season) {
       $.ajax({
-          url: this.props.url + '?season=' + this.state.season_id + '&category=' + this.state.category_id ,
+          url: this.props.url + '?season=' + season.season_id + '&category=' + this.state.category_id ,
           dataType: 'json',
           success: function(result) {
-              this.setState({data: result.data});
+              this.setState({
+                  photo_data: result.data,
+                  season_id: season.season_id
+              });
           }.bind(this),
           error: function(xhr, status, err) {
               console.error(this.props.url, status, err.toString());
@@ -34,9 +37,7 @@ var App = React.createClass({
 
     },
     handleSeasonChange: function(season) {
-        this.setState({
-            season_id: season.season_id
-        })
+        this.loadPhotosFromServer(season);
     }
 });
 
@@ -61,18 +62,6 @@ var PhotoItems = React.createClass({
        </div>
    }
 });
-
- //
- //<div class="library">
- //   <div class="row" id="photo-list">
- //     <% @photos.each do |photo|%>
- //       <div class="col-md-4 col-sm-12">
- //         <a rel="leanModal" href="#modal-area" onClick="set_modal('<%= photo.image.to_s %>', '<%= photo.text.to_s %>', '<%= user_favorite_check(current_user, photo.id) %>', '<%= photo.id %>', '<%= photo.organization.id %>')"><%= image_tag(photo.image, :width => "80%", :alt => "" ) %></a>
- //        </div>
- //     <% end %>
- //   </div>
- // </div>
-
 
 var Photo = React.createClass({
     render: function() {
